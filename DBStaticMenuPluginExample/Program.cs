@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.Windows.Forms;
 using System.Text;
 using DB.Extensibility.Contracts;
@@ -39,12 +40,12 @@ namespace DBStaticMenuPluginExample
         {
             if (key == MenuKeys.ShowMessage)
             {
-                MessageBox.Show("Menu item pressed!");
+                MessageBox.Show(String.Format("Menu item '{0}' pressed!", key));
             }
         }
         public override void Create()
         {
-            MessageBox.Show("Plugin Initialized!");
+            MessageBox.Show("Plugin 'DBStaticMenuPluginExample' initialized!");
         }
     }
 }
