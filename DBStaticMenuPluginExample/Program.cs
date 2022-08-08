@@ -3,9 +3,9 @@ using System.Windows.Forms;
 using System.Text;
 using DB.Extensibility.Contracts;
 
-namespace DBPluginStaticMenu
+namespace DBStaticMenuPluginExample
 {
-    [Export (typeof(IPlugin))]
+    [Export(typeof(IPlugin))]
     public class ExamplePlugin : PluginBase, IPlugin
     {
         class MenuKeys
@@ -19,7 +19,8 @@ namespace DBPluginStaticMenu
         }
         public override string MenuLayout
         {
-            get {
+            get
+            {
                 StringBuilder menu = new StringBuilder();
                 menu.AppendFormat("*Example Plugin,{0}", MenuKeys.Root);
                 menu.AppendFormat("*>Show Message,{0}", MenuKeys.ShowMessage);
@@ -47,4 +48,3 @@ namespace DBPluginStaticMenu
         }
     }
 }
-

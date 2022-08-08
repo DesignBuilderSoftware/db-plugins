@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MyTestDBPlugin")]
+[assembly: AssemblyTitle("DBStaticMenuPluginExample")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ATC")]
-[assembly: AssemblyProduct("MyTestDBPlugin")]
+[assembly: AssemblyProduct("DBStaticMenuPluginExample")]
 [assembly: AssemblyCopyright("Copyright © ATC 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("20521b91-cbbc-493d-a6c4-349352c74127")]
+[assembly: Guid("5ccb5c84-478d-4b90-ba00-c9934a378b24")]
 
 // Version information for an assembly consists of the following four values:
 //

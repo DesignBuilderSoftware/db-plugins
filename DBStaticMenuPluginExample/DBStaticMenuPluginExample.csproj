@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{20521B91-CBBC-493D-A6C4-349352C74127}</ProjectGuid>
+    <ProjectGuid>{5CCB5C84-478D-4B90-BA00-C9934A378B24}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>DBPluginStaticMenu</RootNamespace>
-    <AssemblyName>DBPluginStaticMenu</AssemblyName>
+    <RootNamespace>DBStaticMenuPluginExample</RootNamespace>
+    <AssemblyName>DBStaticMenuPluginExample</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\AppData\Local\DesignBuilder\User Plugins\MyTestDBPlugin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -36,13 +36,11 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DB.Api, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\TestPluginApp\TestPluginApp\DB.Api.dll</HintPath>
+    <Reference Include="DB.Api">
+      <HintPath>..\dlls\DB.Api.dll</HintPath>
     </Reference>
-    <Reference Include="DB.Extensibility.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\TestPluginApp\TestPluginApp\DB.Extensibility.Contracts.dll</HintPath>
+    <Reference Include="DB.Extensibility.Contracts">
+      <HintPath>..\dlls\DB.Extensibility.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -61,10 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DB.Api.dll" />
-    <Content Include="DB.Extensibility.Contracts.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
