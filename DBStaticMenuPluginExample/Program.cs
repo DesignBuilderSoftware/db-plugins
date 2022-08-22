@@ -45,7 +45,7 @@ namespace DBStaticMenuPluginExample
         }
         public override void Create()
         {
-            MessageBox.Show("Plugin 'DBStaticMenuPluginExample' initialized!");
+            MessageBox.Show(String.Format("Plugin '{0}' initialized!", GetType().Namespace));
         }
     }
 }
