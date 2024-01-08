@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBAttributeAdditionPluginEx
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBDesignCalculationReportPluginExample", "DBDesignCalculationReportPluginExample\DBDesignCalculationReportPluginExample.csproj", "{A356A166-ED11-4949-9EB3-0BDC449EEA14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBReportPluginWithDialog", "DBReportPluginWithDialog\DBReportPluginWithDialog.csproj", "{A80BAAA4-A668-42F9-BBDB-D13DBA9FC8DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBReportPluginWithDialogExample", "DBReportPluginWithDialogExample\DBReportPluginWithDialogExample.csproj", "{A80BAAA4-A668-42F9-BBDB-D13DBA9FC8DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
