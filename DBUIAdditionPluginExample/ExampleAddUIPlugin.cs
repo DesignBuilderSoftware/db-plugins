@@ -1,19 +1,11 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Linq;
+﻿using System.ComponentModel.Composition;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using UI_Addition_Plugin;
 using DB.Extensibility.Contracts;
 using DB.Api;
 using Environment = DB.Api.Environment;
 
-namespace UI_Addition_Plugin
+namespace DBUIAdditionPlugin
 {
     [Export(typeof(IPlugin2))]
     public class ExampleAddUIPlugin : PluginBase2, IPlugin2
