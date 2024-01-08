@@ -9,11 +9,11 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Attribute_Addition_Plugin;
+using AttributeAdditionPlugin;
 using DB.Extensibility.Contracts;
 using DB.Api;
 
-namespace Attribute_Addition_Plugin
+namespace AttributeAdditionPlugin
 {
     public partial class frmAttributeInteraction : Form
     {

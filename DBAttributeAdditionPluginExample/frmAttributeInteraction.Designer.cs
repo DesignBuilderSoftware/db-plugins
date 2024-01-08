@@ -1,4 +1,4 @@
-﻿namespace Attribute_Addition_Plugin
+﻿namespace AttributeAdditionPlugin
 {
     partial class frmAttributeInteraction
     {

@@ -1,18 +1,9 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using System.Diagnostics;
-using System.Globalization;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.ComponentModel.Composition;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Attribute_Addition_Plugin;
 using DB.Extensibility.Contracts;
 using DB.Api;
 
-namespace Attribute_Addition_Plugin
+namespace AttributeAdditionPlugin
 {
     [Export(typeof(IPlugin2))]
     public class ExampleAddAttributePlugin : PluginBase2, IPlugin2

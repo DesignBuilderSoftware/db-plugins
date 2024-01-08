@@ -7,6 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBStaticMenuPluginExample",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBDynamicMenuPluginExample", "DBDynamicMenuPluginExample\DBDynamicMenuPluginExample.csproj", "{06BA9368-27F2-45EC-9D90-18B6F2E84BD3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBUIAdditionPluginExample", "DBUIAdditionPluginExample\DBUIAdditionPluginExample.csproj", "{16330B0C-23C7-4CCA-8BA1-72AA57BBA2ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBAttributeAdditionPluginExample", "DBAttributeAdditionPluginExample\DBAttributeAdditionPluginExample.csproj", "{560A03FB-5A24-4F6B-9267-C672BA460801}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBDesignCalculationReportPluginExample", "DBDesignCalculationReportPluginExample\DBDesignCalculationReportPluginExample.csproj", "{A356A166-ED11-4949-9EB3-0BDC449EEA14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBReportPluginWithDialog", "DBReportPluginWithDialog\DBReportPluginWithDialog.csproj", "{A80BAAA4-A668-42F9-BBDB-D13DBA9FC8DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +29,22 @@ Global
 		{06BA9368-27F2-45EC-9D90-18B6F2E84BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06BA9368-27F2-45EC-9D90-18B6F2E84BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06BA9368-27F2-45EC-9D90-18B6F2E84BD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16330B0C-23C7-4CCA-8BA1-72AA57BBA2ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16330B0C-23C7-4CCA-8BA1-72AA57BBA2ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16330B0C-23C7-4CCA-8BA1-72AA57BBA2ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16330B0C-23C7-4CCA-8BA1-72AA57BBA2ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{560A03FB-5A24-4F6B-9267-C672BA460801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{560A03FB-5A24-4F6B-9267-C672BA460801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{560A03FB-5A24-4F6B-9267-C672BA460801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{560A03FB-5A24-4F6B-9267-C672BA460801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A356A166-ED11-4949-9EB3-0BDC449EEA14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A356A166-ED11-4949-9EB3-0BDC449EEA14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A356A166-ED11-4949-9EB3-0BDC449EEA14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A356A166-ED11-4949-9EB3-0BDC449EEA14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A80BAAA4-A668-42F9-BBDB-D13DBA9FC8DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A80BAAA4-A668-42F9-BBDB-D13DBA9FC8DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A80BAAA4-A668-42F9-BBDB-D13DBA9FC8DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A80BAAA4-A668-42F9-BBDB-D13DBA9FC8DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

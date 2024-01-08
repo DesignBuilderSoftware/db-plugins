@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using AttributeAdditionPlugin;
 
-namespace AttributeAdditionPlugin
+namespace DBReportPluginWithDialog
 {
     static class Program
     {
@@ -14,7 +13,7 @@ namespace AttributeAdditionPlugin
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmAttributeInteraction());
+            Application.Run(new MainForm());
         }
     }
 }
