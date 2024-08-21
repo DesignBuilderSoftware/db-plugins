@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBDesignCalculationReportPl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBReportPluginWithDialogExample", "DBReportPluginWithDialogExample\DBReportPluginWithDialogExample.csproj", "{A80BAAA4-A668-42F9-BBDB-D13DBA9FC8DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBFDWRReport", "DBFDWRReport\DBFDWRReport.csproj", "{C023F112-3C83-4391-919B-050C833BBCCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBApplyMeasureExample", "DBApplyMeasureExample\DBApplyMeasureExample.csproj", "{ACC1002C-F564-42C3-86F5-98C2CB41FF45}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{A80BAAA4-A668-42F9-BBDB-D13DBA9FC8DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A80BAAA4-A668-42F9-BBDB-D13DBA9FC8DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A80BAAA4-A668-42F9-BBDB-D13DBA9FC8DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C023F112-3C83-4391-919B-050C833BBCCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C023F112-3C83-4391-919B-050C833BBCCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C023F112-3C83-4391-919B-050C833BBCCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C023F112-3C83-4391-919B-050C833BBCCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACC1002C-F564-42C3-86F5-98C2CB41FF45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACC1002C-F564-42C3-86F5-98C2CB41FF45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACC1002C-F564-42C3-86F5-98C2CB41FF45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACC1002C-F564-42C3-86F5-98C2CB41FF45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
