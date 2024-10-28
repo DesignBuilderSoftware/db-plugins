@@ -8,7 +8,7 @@ using System.ComponentModel.Composition;
 using DB.Extensibility.Contracts;
 using DB.Api;
 
-namespace DBApplyMeasureExample
+namespace DBFDWRReport
 {
     [Export(typeof(IPlugin2))]
     public class ExamplePlugin : PluginBase2, IPlugin2
