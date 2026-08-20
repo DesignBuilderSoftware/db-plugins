@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBApplyMeasureExample", "DB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBReportBridgingLengths", "DBReportBridgingLengths\DBReportBridgingLengths.csproj", "{C39E9988-4E1D-4D3C-85A2-1138C9730C7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBSaveTableToFileExample", "DBSaveTableToFileExample\DBSaveTableToFileExample.csproj", "{DF890724-5490-4AE6-9071-E92EB80098BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{C39E9988-4E1D-4D3C-85A2-1138C9730C7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C39E9988-4E1D-4D3C-85A2-1138C9730C7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C39E9988-4E1D-4D3C-85A2-1138C9730C7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF890724-5490-4AE6-9071-E92EB80098BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF890724-5490-4AE6-9071-E92EB80098BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF890724-5490-4AE6-9071-E92EB80098BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF890724-5490-4AE6-9071-E92EB80098BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
