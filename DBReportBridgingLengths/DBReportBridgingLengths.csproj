@@ -33,10 +33,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DB.Api">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\DesignBuilder\Lib\DB.Api.dll</HintPath>
+      <HintPath>$(MSBuildProgramFiles32)\DesignBuilder\Lib\DB.Api.dll</HintPath>
     </Reference>
     <Reference Include="DB.Extensibility.Contracts">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\DesignBuilder\Lib\DB.Extensibility.Contracts.dll</HintPath>
+      <HintPath>$(MSBuildProgramFiles32)\DesignBuilder\Lib\DB.Extensibility.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
