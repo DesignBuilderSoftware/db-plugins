@@ -63,6 +63,38 @@ zone.SetAttribute("OccupancyValue", "0.1");
 
 Attribute keys are discoverable in the running application via **Tools → Program options → Interface → Interface Style → Show attribute names in tooltips**.
 
+### Recipe: resolving table data from an attribute, for the current building
+
+Many attributes don't hold a value directly — they hold the record handle (row id) of a table. `WindowFrameType`, for example, is a Building/Zone/Surface/Opening attribute whose value is an index into the `Constructions` table. Resolving it to a human-readable name is `GetAttributeAsInt` + `Table.Records.GetRecordFromHandle`:
+
+```csharp
+Table constructions = ApiEnvironment.Site.GetTable("Constructions");
+
+int frameConstrId = building.GetAttributeAsInt("WindowFrameType");
+Record frameRecord = constructions.Records.GetRecordFromHandle(frameConstrId);
+
+MessageBox.Show(frameRecord != null ? frameRecord["Name"] : "Unknown", "Window Frame Construction");
+```
+
+Attributes are inherited down the model hierarchy (Building → BuildingBlock → Zone → Surface → Opening) until a descendant overrides them, so reading `WindowFrameType` at Building level already returns the effective value — there's no need to walk every zone/surface/opening to find it unless you specifically want to know where it's been overridden.
+
+To get that `building` in the first place, resolve it from the building currently shown in the UI via `ApiEnvironment.CurrentBuildingIndex` (`-1` when no building is selected, e.g. the Site screen is active):
+
+```csharp
+public Building GetCurrentBuilding()
+{
+    Site site = ApiEnvironment.Site;
+    int buildingIndex = ApiEnvironment.CurrentBuildingIndex;
+    if (buildingIndex != -1)
+    {
+        return site.Buildings[buildingIndex];
+    }
+    return null;
+}
+```
+
+`DBApplyMeasureExample` and `DBReportBridgingLengths` use this same `CurrentBuildingIndex` pattern inside a real plugin.
+
 ### Menus
 
 `MenuLayout` is a tiny DSL returned as a string; each line is `*<indentation-as-'>' repeats><label>,<key>`. `HasMenu`/`MenuLayout` are read once at load; `IsMenuItemVisible`/`IsMenuItemEnabled` are re-queried on load **and** on every menu press, which is how dynamic menus (see `DBDynamicMenuPluginExample`, `DBFDWRReport`, `DBReportBridgingLengths`, `DBApplyMeasureExample`) toggle sibling items' state from inside `OnMenuItemPressed`.
