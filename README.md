@@ -17,8 +17,9 @@ This repo is the upstream source referenced by DesignBuilder's own Extensibility
 | [DBFDWRReport](DBFDWRReport/Program.cs) | `IPlugin2` | Computes Fenestration-and-Door-to-Wall Ratio (FDWR) per building and per orientation (N/S/E/W) from external wall/opening areas, shown in a message box. |
 | [DBReportBridgingLengths](DBReportBridgingLengths/Program.cs) | `IPlugin2` | Reports linear thermal-bridging junction lengths and Psi-values per zone (wall–floor, wall–roof, lintels, sills, jambs, etc.), saved to a `.txt` file. |
 | [DBApplyMeasureExample](DBApplyMeasureExample/program.cs) | `IPlugin2` | Applies two ECM-style measures to the current building via menu: force the air-handling-unit economiser on (ECM 1), tighten zone infiltration to a fixed rate (ECM 2). |
+| [DBSaveTableToFileExample](DBSaveTableToFileExample/Program.cs) | `IPlugin2` | Lists every table in the master `TableOfTables` table; saves one table — picked from a filterable name-search dialog rather than typed — or all of them at once into a chosen folder, via the DB API's own `Table.SaveToFile`. |
 
-`DBPlugins.sln` includes all nine projects; open it in Visual Studio to build any or all of them.
+`DBPlugins.sln` includes all ten projects; open it in Visual Studio to build any or all of them.
 
 ## How the plugins work (reference)
 
@@ -34,7 +35,7 @@ public class ExamplePlugin : PluginBase2, IPlugin2 { ... }
 If the `[Export(...)]` attribute is missing, the assembly builds fine but DesignBuilder silently skips it — this is the most common "why isn't my plugin showing up" mistake.
 
 - **`IPlugin` / `PluginBase`** — simulation, optimisation, CFD, daylighting, cost/carbon hooks (e.g. `BeforeEnergySimulation`, `AfterEnergySimulation`) plus the menu API.
-- **`IPlugin2` / `PluginBase2`** — everything `IPlugin` has, plus `ModelLoaded()`, `ModelUnloaded()`, and `ScreenChanged(ScreenCode)`. Prefer `IPlugin2` for new plugins; six of the nine examples in this repo use it.
+- **`IPlugin2` / `PluginBase2`** — everything `IPlugin` has, plus `ModelLoaded()`, `ModelUnloaded()`, and `ScreenChanged(ScreenCode)`. Prefer `IPlugin2` for new plugins; seven of the ten examples in this repo use it.
 
 All projects here build with `<OutputType>Library</OutputType>` — they are DLLs, not executables. A few of the older examples (e.g. `DBAttributeAdditionPluginExample`) still carry a `Program.cs` with a WinForms `static void Main()`; that's inert leftover boilerplate from the Visual Studio project template and never runs, since a Library has no entry point.
 
@@ -117,13 +118,13 @@ Restart DesignBuilder to pick it up. To disable a plugin without deleting it, re
 
 ## Building
 
-**Prerequisite**: a local DesignBuilder installation (default `C:\Program Files (x86)\DesignBuilder\`). All nine projects reference `DB.Api.dll` and `DB.Extensibility.Contracts.dll` straight from that install's `Lib` folder via `$(MSBuildProgramFiles32)\DesignBuilder\Lib\*.dll` — there is no bundled copy of these DLLs in the repo, so building requires DesignBuilder to be installed on the build machine.
+**Prerequisite**: a local DesignBuilder installation (default `C:\Program Files (x86)\DesignBuilder\`). All ten projects reference `DB.Api.dll` and `DB.Extensibility.Contracts.dll` straight from that install's `Lib` folder via `$(MSBuildProgramFiles32)\DesignBuilder\Lib\*.dll` — there is no bundled copy of these DLLs in the repo, so building requires DesignBuilder to be installed on the build machine.
 
 1. Open `DBPlugins.sln` in Visual Studio 2019+ (or `msbuild DBPlugins.sln`).
 2. Build. `DB.Api.dll` / `DB.Extensibility.Contracts.dll` copy-local into each project's output folder alongside the plugin DLL (default `CopyLocal` behaviour), so the output folder is ready to deploy as-is.
 3. Build output lands in each project's own `bin\Debug` / `bin\Release`.
 
-All nine projects target **.NET Framework 4.8** (`TargetFrameworkVersion` and each `App.config`'s `supportedRuntime` are kept in sync).
+All ten projects target **.NET Framework 4.8** (`TargetFrameworkVersion` and each `App.config`'s `supportedRuntime` are kept in sync).
 
 ## Adding a new plugin project
 
