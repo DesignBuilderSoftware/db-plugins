@@ -84,23 +84,6 @@ A prior completed simulation that produced `eplusout.eio` is required.
    if you close without saving, the changes are lost.
 6. **Re-run** to confirm the model still simulates and gives comparable results.
 
-## Installation
-
-1. Close DesignBuilder.
-2. Create this folder:
-   ```
-   %LOCALAPPDATA%\DesignBuilder\User Plugins\AutoHardsizeModel\
-   ```
-3. Copy three files into it:
-   - `DBAutoHardsizeModel.dll`
-   - `DB.Api.dll`
-   - `DB.Extensibility.Contracts.dll`
-
-   The two `DB.*` files come from your DesignBuilder installation, under
-   `Components\DB.Api\` and `Components\DB.Extensibility\`. Use the copies from
-   your own installation so the versions match.
-4. Start DesignBuilder. A **Hardsizing** menu appears in the menu bar.
-
 ---
 
 ## Usage
