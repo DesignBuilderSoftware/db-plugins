@@ -52,11 +52,16 @@ A prior completed simulation that produced `eplusout.eio` is required.
 ## Installation
 
 1. Close DesignBuilder.
-2. Create this folder:
+2. Copy the two DesignBuilder assemblies from the plugin references:
+   - `DB.Api.dll`
+   - `DB.Extensibility.Contracts.dll`
+3. Build the plugin:
+   - Build DBAutoHardsizeModel.csproj in Visual Studio to produce DBAutoHardsizeModel.dll
+4. Create the plugin folder:
    ```
    %LOCALAPPDATA%\DesignBuilder\User Plugins\AutoHardsizeModel\
    ```
-3. Copy three files into it:
+5. Copy three files into it:
    - `DBAutoHardsizeModel.dll`
    - `DB.Api.dll`
    - `DB.Extensibility.Contracts.dll`
@@ -64,7 +69,7 @@ A prior completed simulation that produced `eplusout.eio` is required.
    The two `DB.*` files come from your DesignBuilder installation, under
    `Components\DB.Api\` and `Components\DB.Extensibility\`. Use the copies from
    your own installation so the versions match.
-4. Start DesignBuilder. A **Hardsizing** menu appears in the menu bar.
+6. Start DesignBuilder. A **Hardsizing** menu appears in the menu bar.
 
 ---
 
