@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9E14D7B3-6C28-4F51-A70D-3B5C812F4E66}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>DBAutoHardsizeModel</RootNamespace>
+    <AssemblyName>DBAutoHardsizeModel</AssemblyName>
+    <!-- .NET Framework 4.8. The Extensibility Guide cites 4.6 as the tested
+         version, but 4.6/4.7/4.8 are in-place updates sharing CLR 4, so 4.8
+         assemblies load fine in DesignBuilder. Confirmed working in practice. -->
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <!-- Update these hint paths to your DesignBuilder installation:
+         DB.Api.dll                   <DB install>\Components\DB.Api\
+         DB.Extensibility.Contracts.dll  <DB install>\Components\DB.Extensibility\ -->
+    <Reference Include="DB.Api">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DesignBuilder\Lib\DB.Api.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DB.Extensibility.Contracts">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\DesignBuilder\Lib\DB.Extensibility.Contracts.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutoHardsizeModelPlugin.cs" />
+    <Compile Include="ModelHardsizeMap.cs" />
+    <Compile Include="EioSizingReader.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
