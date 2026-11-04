@@ -24,6 +24,16 @@ How to Use:
   USER CONFIGURATION SECTION of ImportMap.cs. By default:
     DX cooling coil  - RatedTotalCoolingCapacity, RatedSensibleHeatRatio, RatedCOP
     DX heating coil  - RatedTotalHeatingCapacity, RatedCOP
+    VRF DX cooling coil  - GrossRatedTotalCoolingCapacity, GrossRatedSensibleHeatRatio
+    VRF DX heating coil  - GrossRatedTotalHeatingCapacity
+    WSHP DX cooling coil - GrossRatedTotalCoolingCapacity, GrossRatedSensibleCoolingCapacity,
+                           RatedCoolingCoefficientOfPerformance (Equation Fit coils)
+    WSHP DX heating coil - EquationFitGrossRatedHeatingCapacity,
+                           RatedHeatingCoefficientOfPerformance (Equation Fit coils)
+    Heating coil     - NominalCapacity (electric and fuel coils), RatedCapacity (water coils)
+    Water cooling coil - DesignWaterFlowRate, DesignAirFlowRate, DesignInletWaterTemperature,
+                       DesignInletAirTemperature, DesignOutletAirTemperature,
+                       DesignInletAirHumidityRatio, DesignOutletAirHumidityRatio
     Fan              - MaximumFlowRate, PressureRise
   A fan inside a unit takes its flow rate from the unit, so for those fans MaximumFlowRate is
   written to the unit instead: the design supply air flow rate of an air handling unit, the
@@ -81,9 +91,9 @@ namespace DBHvacGridImport
         public string FileDisplay;
         /// <summary>Text written to the model, in SI.</summary>
         public string NewValue;
-        /// <summary>DesignBuilder display unit and its factor to SI, for messages.</summary>
+        /// <summary>DesignBuilder display unit and its conversion to SI, for messages.</summary>
         public string DisplayUnit;
-        public double DisplayFactor;
+        public UnitConversion DisplayConversion;
         /// <summary>Where the value came from when it is written to a unit rather than
         /// to the row's own component, e.g. "from BLOCK1:ZONE1 PTHP Supply Fan".</summary>
         public string Note = "";
@@ -107,15 +117,15 @@ namespace DBHvacGridImport
     internal class ColumnUnits
     {
         public string FileUnit = "";
-        public double FileFactor = 1.0;
+        public UnitConversion FileConversion;
         public string DisplayUnit = "";
-        public double DisplayFactor = 1.0;
+        public UnitConversion DisplayConversion;
 
         /// <summary>True when the file is already in DesignBuilder's units, so its
         /// values are shown without conversion.</summary>
         public bool SameUnits
         {
-            get { return Math.Abs(FileFactor - DisplayFactor) <= 1e-12 * Math.Abs(DisplayFactor); }
+            get { return FileConversion.SameAs(DisplayConversion); }
         }
     }
 
@@ -436,13 +446,13 @@ namespace DBHvacGridImport
                     columnUnits.FileUnit = file.CaptionUnit(column.Attribute);
                     columnUnits.DisplayUnit = ImportMap.DisplayUnit(column.Quantity, displayUnits);
                 }
-                if (!ImportMap.TryGetToSiFactor(columnUnits.FileUnit, out columnUnits.FileFactor))
+                if (!ImportMap.TryGetConversion(columnUnits.FileUnit, out columnUnits.FileConversion))
                 {
                     problems.Add(fileName + ": " + column.Attribute + " - the unit '" + columnUnits.FileUnit +
                                  "' is not recognised, so the column was skipped (see ImportMap.cs).");
                     continue;
                 }
-                if (!ImportMap.TryGetToSiFactor(columnUnits.DisplayUnit, out columnUnits.DisplayFactor))
+                if (!ImportMap.TryGetConversion(columnUnits.DisplayUnit, out columnUnits.DisplayConversion))
                 {
                     problems.Add(fileName + ": " + column.Attribute + " - the display unit '" +
                                  columnUnits.DisplayUnit + "' has no conversion in ImportMap.cs.");
@@ -533,7 +543,7 @@ namespace DBHvacGridImport
                     problems.Add(where + " - '" + text + "' is not a number.");
                     return;
                 }
-                si = fileValue * units.FileFactor;
+                si = units.FileConversion.ToSi(fileValue);
                 if (!InRange(si, column))
                 {
                     problems.Add(where + " - " + JoinUnit(text, units.FileUnit) +
@@ -593,7 +603,8 @@ namespace DBHvacGridImport
                 }
                 else
                 {
-                    if (currentIsNumber && ReadsTheSame(currentSi / units.FileFactor, fileValue, decimals))
+                    if (currentIsNumber &&
+                        ReadsTheSame(units.FileConversion.FromSi(currentSi), fileValue, decimals))
                     {
                         unchanged++;
                         continue;
@@ -601,7 +612,16 @@ namespace DBHvacGridImport
                     newValue = si.ToString("0.##########", CultureInfo.InvariantCulture);
                     newDisplay = units.SameUnits
                         ? JoinUnit(text, units.DisplayUnit)
-                        : Display(si / units.DisplayFactor, units.DisplayUnit);
+                        : Display(units.DisplayConversion.FromSi(si), units.DisplayUnit);
+                }
+
+                // Checked only now, so the unedited cells of an input this component type does
+                // not use (always present in the export) are not reported.
+                string unmet = UnmetCondition(owner.Component, column.OnlyWhen);
+                if (unmet != null)
+                {
+                    problems.Add(where + " - not used by this component (" + unmet + "), so not imported.");
+                    continue;
                 }
 
                 changes.Add(new PendingChange
@@ -611,17 +631,49 @@ namespace DBHvacGridImport
                     Container = container,
                     Attribute = attribute,
                     CurrentDisplay = currentIsNumber
-                        ? Display(currentSi / units.DisplayFactor, units.DisplayUnit)
+                        ? Display(units.DisplayConversion.FromSi(currentSi), units.DisplayUnit)
                         : current,
                     NewDisplay = newDisplay,
                     FileDisplay = units.SameUnits ? "" : JoinUnit(text, units.FileUnit),
                     NewValue = newValue,
                     DisplayUnit = units.DisplayUnit,
-                    DisplayFactor = units.DisplayFactor,
+                    DisplayConversion = units.DisplayConversion,
                     Note = note,
                     Component = owner.Component
                 });
             }
+        }
+
+        /// <summary>
+        /// Checks the column's OnlyWhen conditions ("Attribute=word,word") against the
+        /// component. Returns null when they are met, otherwise the failing attribute and
+        /// its value, e.g. "Type is 1-Water".
+        /// </summary>
+        private static string UnmetCondition(HvacComponent component, string[] onlyWhen)
+        {
+            if (onlyWhen == null)
+            {
+                return null;
+            }
+            foreach (string condition in onlyWhen)
+            {
+                int equals = condition.IndexOf('=');
+                string attribute = condition.Substring(0, equals);
+                string value = Attr(component, attribute);
+                bool met = false;
+                foreach (string word in condition.Substring(equals + 1).Split(','))
+                {
+                    if (value.IndexOf(word.Trim(), StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        met = true;
+                    }
+                }
+                if (!met)
+                {
+                    return attribute + " is " + (value.Length > 0 ? value : "not set");
+                }
+            }
+            return null;
         }
 
         /// <summary>True when the model value, written to the decimal places used in the
@@ -646,8 +698,8 @@ namespace DBHvacGridImport
         /// <summary>Valid range in DesignBuilder's current units.</summary>
         private static string RangeText(ImportColumn column, ColumnUnits units)
         {
-            string min = (column.Min / units.DisplayFactor).ToString("G6", CultureInfo.InvariantCulture);
-            string max = (column.Max / units.DisplayFactor).ToString("G6", CultureInfo.InvariantCulture);
+            string min = units.DisplayConversion.FromSi(column.Min).ToString("G6", CultureInfo.InvariantCulture);
+            string max = units.DisplayConversion.FromSi(column.Max).ToString("G6", CultureInfo.InvariantCulture);
             if (!double.IsInfinity(column.Max))
             {
                 return JoinUnit(min + " to " + max, units.DisplayUnit);
@@ -707,7 +759,7 @@ namespace DBHvacGridImport
                 {
                     double storedSi;
                     string storedDisplay = TryParseInvariant(stored, out storedSi)
-                        ? Display(storedSi / change.DisplayFactor, change.DisplayUnit)
+                        ? Display(change.DisplayConversion.FromSi(storedSi), change.DisplayUnit)
                         : stored;
                     mismatches.Add(change.Title + " :: " + change.Attribute + " - expected " +
                                    change.NewDisplay + ", model now reads " + storedDisplay);

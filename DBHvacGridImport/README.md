@@ -41,7 +41,18 @@ setting as usual.
 |---|---|
 | DX cooling coil | Rated total cooling capacity, rated sensible heat ratio, gross rated COP |
 | DX heating coil | Gross rated heating capacity, gross rated heating COP |
+| VRF DX cooling coil | Gross rated total cooling capacity, gross rated sensible heat ratio |
+| VRF DX heating coil | Gross rated total heating capacity |
+| Water-to-air heat pump (WSHP) DX cooling coil | Gross rated total cooling capacity, gross rated sensible cooling capacity, rated cooling COP (Equation Fit coils) |
+| Water-to-air heat pump (WSHP) DX heating coil | Gross rated heating capacity, rated heating COP (Equation Fit coils) |
+| Heating coil (water, electric, fuel) | Nominal capacity (electric and fuel coils); heating design capacity (water coils) |
+| Water cooling coil | Design water flow rate, design air flow rate, design inlet water temperature, design inlet air temperature, design outlet air temperature, design inlet air humidity ratio, design outlet air humidity ratio |
 | Fan | Maximum flow rate (see below), pressure rise |
+
+**Heating coil capacity.** Each heating coil holds two capacity inputs but uses only one: electric
+and fuel coils use the nominal capacity, and water coils use the heating design capacity (with the
+"Nominal capacity" performance input method). Enter the capacity in the column that matches the coil
+type. A changed value in the other column is listed as not imported rather than written.
 
 **Fan flow rates.** A fan inside a unit takes its flow rate from the unit, and its own maximum flow
 rate is greyed out in DesignBuilder. For these fans the plugin writes the flow rate to the unit
@@ -66,8 +77,9 @@ Unedited cells do not cause small changes: a value is treated as unedited when t
 in the file's units and to the number of decimal places written in the file, reads the same. For
 example, a fan at 100 Pa that the export shows as `0.4` inH2O is left at 100 Pa.
 
-Values outside the EnergyPlus input limits (for example a sensible heat ratio outside 0.5 to 1.0, or a
-zero capacity, COP or flow rate) are rejected and listed in the dialog.
+Values outside the EnergyPlus input limits (for example a sensible heat ratio outside 0.5 to 1.0, a
+design temperature at or below 0 C, or a zero capacity, COP or flow rate) are rejected and listed in
+the dialog.
 
 ## Requirements
 
@@ -117,6 +129,8 @@ range. Rebuild the plugin after editing.
 - Only the current building is updated. In a single-building model the Site level also works.
 - DX cooling coils: only the general (single-speed) fields are imported, not the per-stage fields of
   multi-stage or dehumidification-mode coils.
+- Water-to-air heat pump coils: only Equation Fit coils are imported. A changed value for a parameter
+  estimation coil is listed as not imported.
 - Values are not checked against each other. Fixing a coil capacity or fan flow while related inputs
   stay autosized (for example the coil rated air flow rate, or the PTHP supply air flow rates) can
   produce EnergyPlus warnings about inconsistent sizes. Check `eplusout.err` after the first run.
